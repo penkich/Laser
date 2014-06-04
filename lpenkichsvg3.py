@@ -107,17 +107,6 @@ def C2point(t,x0,y0,data):
                 j +=3
 	return ar2
 
-def a_origin(x0,y0,a,b,x1,y1):
-	P = (x0+x1)/2.0 + a*a*(y0+y1)*(y0-y1)/(2.0*b*b*(x0-x1))
-	Q = -a*a*(y0-y1)/(b*b*(x0-x1))
-	A = a*a +b*b*Q*Q
-	B = 2.0*b*b*P*Q -2.0*b*b*Q*x0 -2.0*a*a*y0
-	C = b*b*x0*x0 -2.0*b*b*P*x0 +b*b*P*P +a*a*y0*y0 -a*a*b*b
-	dy = (-B +math.sqrt(B*B -4.0*A*C))/(2.0*A)
-	dx = P + Q*dy
-	return dx,dy
-
-
 def rotate(x,y,angle):
 	angle = angle * math.pi/180.0
 	x1 = x*math.cos(angle) - y*math.sin(angle)
@@ -262,16 +251,6 @@ def getpoint(structPath,Matrix,Trcxy,Translate,t):
                                        tmp += m
 			       if s3 == 'C':
 				       m = C2point(t,x0,y0,path[i+1])
-                                       x0,y0 = m[-1][0],m[-1][1]
-                                       if i ==0: xs,ys = m[0][0],m[0][1]
-                                       tmp += m
-			       if s3 == 'a':
-				       m = a2point(t,x0,y0,path[i+1])
-                                       x0,y0 = m[-1][0],m[-1][1]
-                                       if i ==0: xs,ys = m[0][0],m[0][1]
-                                       tmp += m
-			       if s3 == 'A':
-				       m = A2point(t,x0,y0,path[i+1])
                                        x0,y0 = m[-1][0],m[-1][1]
                                        if i ==0: xs,ys = m[0][0],m[0][1]
                                        tmp += m
