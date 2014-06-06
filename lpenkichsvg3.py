@@ -48,7 +48,7 @@ def M2point(t,x0,y0,data):
                 for i, m in enumerate(ar):
                         if i >0:
                                 distance = np.linalg.norm(ar[i]-ar[i-1])
-                                tt = int((t * distance)//200)
+                                tt = int((t * distance)//300)
                                 if tt < 2:
                                         tt = 2
                                 for k in range(tt+1):
@@ -63,7 +63,7 @@ def L2point(t,x0,y0,data):
         for i, m in enumerate(ar):
                 if i >0:
                         distance = np.linalg.norm(ar[i]-ar[i-1])
-                        tt = int((t * distance)//200)
+                        tt = int((t * distance)//300)
                         if tt < 2:
                                 tt = 2
                         for k in range(tt+1):
@@ -81,7 +81,7 @@ def z2point(t,x0,y0,xs,ys):
         distance = np.linalg.norm(ars-ar0)
         if distance ==0:
                 return [ar0.tolist()]
-        tt = int(t * distance /200)
+        tt = int(t * distance /300)
         if tt < 2:
                 tt = 2
 	for k in range(tt+1):
@@ -113,19 +113,31 @@ def rotate(x,y,angle):
 	y1 = x*math.sin(angle) + y*math.cos(angle)
 	return x1,y1
 
-def exec_matrix(data,a,b,c,d,e,f,trcx,trcy):
+def exec_matrix(data,Matrix):
 	ar = []
-	for x in data:
-		ar.append([a * (x[0] -trcx) +c * (x[1] -trcy) +e +trcx,
-                           b * (x[0] -trcx) +d * (x[1] -trcy) +f +trcy])
-	return ar
+        if Matrix:
+                a,b,c,d,e,f = Matrix
+#                trcx,trcy = Trcxy
+                trcx,trcy = 0,0
+                for x in data:
+                        ar.append([a * (x[0] -trcx) +c * (x[1] -trcy) +e +trcx,
+                                   b * (x[0] -trcx) +d * (x[1] -trcy) +f +trcy])
+                return ar
+        else:
+                return data
 
-def exec_translate(data,tx,ty,trcx,trcy):
+def exec_translate(data,translate):
         ar = []
-        for x in data:
-                ar.append([x[0]-trcx + tx,
-                           x[1]-trcy + ty])
-        return ar
+        if translate:
+                tx,ty = translate
+                trcx=0
+                trcy=0
+                for x in data:
+                        ar.append([x[0]-trcx + tx,
+                                   x[1]-trcy + ty])
+                return ar
+        else:
+                return data
 
 class inksvg:
         def __init__(self,fname):
@@ -257,64 +269,103 @@ def getpoint(structPath,Matrix,Trcxy,Translate,t):
 			       if s3 == 'z':
 				       m = z2point(t,x0,y0,xs,ys)
                                        tmp += m
-                       if Matrix[j]:
-                               [a,b,c,d,e,f] = Matrix[j]
-                               [trcx,trcy] = Trcxy[j]
-                               tmp = exec_matrix(tmp,a,b,c,d,e,f,trcx,trcy)
-                       if Translate[j]:
-                               a=1
+                       #if Matrix[j]:
+                               #[a,b,c,d,e,f] = Matrix[j]
+                               #[trcx,trcy] = Trcxy[j]
+                       #        tmp = exec_matrix(tmp,Matrix[j],Trcxy[j])
+                       #if Translate[j]:
+                       #        a=1
                        j+=1
                        ar.append(tmp)
                return ar
 
 def touitu_d(x0,y0,d1):
         tmp =[]
-        tmp2 =[]
-        for i,s3 in enumerate(d1):
-                if s3 == 'm':
+        for i,x in enumerate(d1):
+                if x == 'm':
                         tmp.append('M')
                         tmp2 = rel2abs(x0,y0,d1[i+1])
-                        tmp.append(tmp2)
+                        tmp.append(tmp2[1:])
                         x0,y0 = tmp2[-1]
-                if s3 == 'l':
+                if x == 'l':
                         tmp.append('L')
                         tmp2 = rel2abs(x0,y0,d1[i+1])
-                        tmp.append(tmp2)
+                        tmp.append(tmp2[1:])
                         x0,y0 = tmp2[-1]
-                if s3 == 'c':
+                if x == 'c':
                         tmp.append('C')
                         tmp2 = rel2abs4c(x0,y0,d1[i+1])
                         tmp.append(tmp2)
                         x0,y0 = tmp2[-1]
-                elif s3 == 'z':
+                if x == 'M':
+                        tmp.append('M')
+                        tmp2 = d1[i+1]
+                        tmp.append(tmp2)
+                        x0,y0 = tmp2[-1]
+                if x == 'L':
+                        tmp.append('L')
+                        tmp2 = d1[i+1]
+                        tmp.append(tmp2)
+                        x0,y0 = tmp2[-1]
+                if x == 'z':
                         tmp.append(d1[i])
                         break
         return tmp
 
 
-def devided(d1,d2,n):
+def devided(d1,d2,n,matrix1,matrix2,translate1,translate2):
         tmp =[]
         for i,s3 in enumerate(d1):
                 if re.match('[mMcClLaA]',str(s3)):
                         tmp.append(d1[i])
-                        npd1 = np.array(d1[i+1])
-                        npd2 = np.array(d2[i+1])
+                        npd1 = np.array(exec_translate(exec_matrix(d1[i+1],matrix1),translate1))
+                        npd2 = np.array(exec_translate(exec_matrix(d2[i+1],matrix2),translate2))
                         tmp.append((npd1*(1-n) +npd2*(n)).tolist())
                 elif s3 == 'z':
                         tmp.append(d1[i])
                         break
         return tmp
 
-a=inksvg2("Fo2.svg")
-structPath = a.getstructPath()
-Matrix = a.getmatrix()
-Translate = a.gettranslate()
-Trcxy = a.gettrcxy()
-b= getpoint(structPath,Matrix,Trcxy,Translate,12)
+def devidestructPath(structPath1,structPath2,n,Matrix1,Matrix2,Translate1,Translate2):
+        tmp = []
+        for i,m in enumerate(structPath1):
+                tmp.append(devided(structPath1[i],structPath2[i],n,Matrix1[i],Matrix2[i],Translate1[i],Translate2[i]))
+        return tmp
 
-#print a.structPath
-print b
+def touitustructPath(structPath):
+        tmp = []
+        for m in structPath:
+                tmp.append(touitu_d(0,0,m))
+        return tmp
 
-for x in(b):
-        for y in x:
-                print y[0], ",", y[1]
+a=inksvg2("hosi1.svg")
+b=inksvg2("hosi2.svg")
+a_structPath = a.getstructPath()
+a_Matrix = a.getmatrix()
+a_Translate = a.gettranslate()
+a_Trcxy = a.gettrcxy()
+b_structPath = b.getstructPath()
+b_Matrix = b.getmatrix()
+b_Translate = b.gettranslate()
+b_Trcxy = b.gettrcxy()
+
+print a_Translate
+print b_Translate
+
+
+#print a_Matrix
+#print a_Trcxy
+#print b_Matrix
+#print b_Trcxy
+print touitustructPath(a_structPath)
+#print b_structPath
+print touitustructPath(b_structPath)
+
+
+n = 20
+for i in range(n):
+        c=devidestructPath(touitustructPath(a_structPath),touitustructPath(b_structPath),1.0/(n-1) * i,a_Matrix,b_Matrix,a_Translate,b_Translate)
+        d= getpoint(c,a_Matrix,a_Trcxy,a_Translate,12)
+        for x in(d):
+                for y in x:
+                        print y[0], ",", y[1]
