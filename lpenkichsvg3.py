@@ -349,23 +349,27 @@ b_Matrix = b.getmatrix()
 b_Translate = b.gettranslate()
 b_Trcxy = b.gettrcxy()
 
-print a_Translate
-print b_Translate
+#print a_Translate
+#print b_Translate
 
 
 #print a_Matrix
 #print a_Trcxy
 #print b_Matrix
 #print b_Trcxy
-print touitustructPath(a_structPath)
+#print touitustructPath(a_structPath)
 #print b_structPath
-print touitustructPath(b_structPath)
+#print touitustructPath(b_structPath)
 
 
 n = 20
 for i in range(n):
         c=devidestructPath(touitustructPath(a_structPath),touitustructPath(b_structPath),1.0/(n-1) * i,a_Matrix,b_Matrix,a_Translate,b_Translate)
         d= getpoint(c,a_Matrix,a_Trcxy,a_Translate,12)
-        for x in(d):
-                for y in x:
-                        print y[0], ",", y[1]
+        print d
+#        for x in(d):
+#                for y in x:
+#                        tmp1.append(y[0])
+#                        tmp2.append(y[1])
+#print "x=",tmp1
+#print "y=",tmp2
