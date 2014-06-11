@@ -1,4 +1,4 @@
-################################################
+#################################################
 # lpenkichsvg3.py by penkich
 # for fablab kitakagaya rev 2014-04-02
 # 2014-05-06
@@ -6,6 +6,7 @@
 #################################################
 import libxml2,math,re
 import numpy as np
+import pickle
 
 def getPointC(t,ar1,ar2,ar3,ar4):
         tp = 1.0 - t
@@ -362,11 +363,14 @@ b_Trcxy = b.gettrcxy()
 #print touitustructPath(b_structPath)
 
 
-n = 20
+tmp =[]
+n = 3
 for i in range(n):
         c=devidestructPath(touitustructPath(a_structPath),touitustructPath(b_structPath),1.0/(n-1) * i,a_Matrix,b_Matrix,a_Translate,b_Translate)
         d= getpoint(c,a_Matrix,a_Trcxy,a_Translate,12)
-        print d
+        tmp.append(d)
+#print tmp
+print pickle.dumps(tmp)
 #        for x in(d):
 #                for y in x:
 #                        tmp1.append(y[0])
