@@ -1,8 +1,9 @@
-#################################################
+################################################
 # lpenkichsvg3.py by penkich
 # for fablab kitakagaya rev 2014-04-02
 # 2014-05-06
 # class 2014-05-10
+# flame 2014-06-13
 #################################################
 import libxml2,math,re
 import numpy as np
@@ -118,7 +119,6 @@ def exec_matrix(data,Matrix):
 	ar = []
         if Matrix:
                 a,b,c,d,e,f = Matrix
-#                trcx,trcy = Trcxy
                 trcx,trcy = 0,0
                 for x in data:
                         ar.append([a * (x[0] -trcx) +c * (x[1] -trcy) +e +trcx,
@@ -221,13 +221,6 @@ class inksvg:
 			else:
 				tmp2.append("")
 		return tmp2
-
-class inksvg2(inksvg):
-        def convC2c(self):
-                print getPath(self)
-
-
-
 
 def getpoint(structPath,Matrix,Trcxy,Translate,t):
                ar =[]
@@ -338,42 +331,3 @@ def touitustructPath(structPath):
         for m in structPath:
                 tmp.append(touitu_d(0,0,m))
         return tmp
-
-a=inksvg2("hosi1.svg")
-b=inksvg2("hosi2.svg")
-a_structPath = a.getstructPath()
-a_Matrix = a.getmatrix()
-a_Translate = a.gettranslate()
-a_Trcxy = a.gettrcxy()
-b_structPath = b.getstructPath()
-b_Matrix = b.getmatrix()
-b_Translate = b.gettranslate()
-b_Trcxy = b.gettrcxy()
-
-#print a_Translate
-#print b_Translate
-
-
-#print a_Matrix
-#print a_Trcxy
-#print b_Matrix
-#print b_Trcxy
-#print touitustructPath(a_structPath)
-#print b_structPath
-#print touitustructPath(b_structPath)
-
-
-tmp =[]
-n = 3
-for i in range(n):
-        c=devidestructPath(touitustructPath(a_structPath),touitustructPath(b_structPath),1.0/(n-1) * i,a_Matrix,b_Matrix,a_Translate,b_Translate)
-        d= getpoint(c,a_Matrix,a_Trcxy,a_Translate,12)
-        tmp.append(d)
-#print tmp
-print pickle.dumps(tmp)
-#        for x in(d):
-#                for y in x:
-#                        tmp1.append(y[0])
-#                        tmp2.append(y[1])
-#print "x=",tmp1
-#print "y=",tmp2
