@@ -3,7 +3,7 @@ import pickle
 import sys
 import re
 import math
-import lpenkichsvgcl3 as pensvg
+import lpenkichsvg3 as pensvg
 
 argvs = sys.argv
 argc = len(argvs)
