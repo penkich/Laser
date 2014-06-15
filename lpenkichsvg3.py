@@ -14,7 +14,7 @@ def getPointC(t,ar1,ar2,ar3,ar4):
         return  (t * t * t * np.array(ar4)
                  + 3.0 * t * t * tp * np.array(ar3)
                  + 3.0 * t * tp * tp * np.array(ar2)
-                 + tp * tp * tp * np.array(ar1))
+                 + tp * tp * tp * np.array(ar1)).tolist()
 
 def rel2abs(x0,y0,data):
         npar = np.array([[x0,y0]] + data)
