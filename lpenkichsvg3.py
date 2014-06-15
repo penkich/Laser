@@ -143,6 +143,14 @@ def exec_translate(data,translate):
 class inksvg:
         def __init__(self,fname):
 		self.fname = fname
+        def getg(self):
+                tmp =[]
+                doc = libxml2.parseFile(self.fname)
+                for node in doc:
+                        if node.name == "g":
+                                tmp.append(str(node))
+                doc.freeDoc()
+                return tmp
         def getPath(self):
                 tmp =[]
                 doc = libxml2.parseFile(self.fname)
@@ -200,6 +208,18 @@ class inksvg:
         def getmatrix(self):
                 tmp2 =[]
 		for s in self.getPath():
+                        tmp =[]
+        		m = re.match('.*transform\=\"matrix\(([\-\.\d\,]*)\).*\"',s)
+        		if m:
+        			for v in m.group(1).split(','):
+                			tmp.append(float(v))
+                                tmp2.append(tmp)
+			else:
+				tmp2.append("")
+		return tmp2
+        def getgmatrix(self):
+                tmp2 =[]
+		for s in self.getg():
                         tmp =[]
         		m = re.match('.*transform\=\"matrix\(([\-\.\d\,]*)\).*\"',s)
         		if m:
