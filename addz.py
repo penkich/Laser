@@ -40,6 +40,7 @@ def hokan(ar1,ar2):
 
 
 tmp = []
+out = []
 for path in flame:
         n = len(path)
         for i in range(n-1):
@@ -51,5 +52,6 @@ for path in flame:
                 tmp.append([x[0],x[1],HIGH])
         for x in hokan(path[-1],path[0]): # do hokan the last path to the 1st path 
                 tmp.append([x[0],x[1],x[2]])
-#print tmp
-print pickle.dumps(tmp)
+        out.append(tmp)
+#print len(out)
+print pickle.dumps(out)
