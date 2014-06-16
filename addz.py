@@ -9,7 +9,7 @@ import pickle
 #argc = len(argvs)
 
 fi = sys.stdin
-flame = pickle.load(fi)
+flames = pickle.load(fi)
 
 global HIGH
 HIGH = 30000
@@ -40,18 +40,25 @@ def hokan(ar1,ar2):
 
 
 tmp = []
+tmp2 =[]
 out = []
-for path in flame:
-        n = len(path)
+for paths in flames:
+	tmp2 =[]
+        n = len(paths)
         for i in range(n-1):
-                for x in (path[i]):
+		tmp =[]
+                for x in (paths[i]):
                         tmp.append([x[0],x[1],HIGH])
-                for x in hokan(path[i],path[i+1]): # do hokan the last path to the next path
-                        tmp.append([x[0],x[1],x[2]]) 
-        for x in (path[-1]): # the last path
+                for x in hokan(paths[i],paths[i+1]): # do hokan the last path to the next path
+                        tmp.append([x[0],x[1],x[2]])
+		tmp2.append(tmp)
+	tmp =[]
+        for x in (paths[-1]): # the last path
                 tmp.append([x[0],x[1],HIGH])
-        for x in hokan(path[-1],path[0]): # do hokan the last path to the 1st path 
+        for x in hokan(paths[-1],paths[0]): # do hokan the last path to the 1st path 
                 tmp.append([x[0],x[1],x[2]])
-        out.append(tmp)
-#print len(out)
+	tmp2.append(tmp)
+	out.append(tmp2)
+#print len(out),len(out[0]),len(out[0][0])
+#print out[0][0]
 print pickle.dumps(out)
