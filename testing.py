@@ -4,7 +4,9 @@ root=a.getroot()
 ns={'ns': 'http://www.w3.org/2000/svg'}
 #root.find('ns:g',namespaces=ns)
 for i,x in enumerate(root):
-	if x.find('ns:g',namespaces=ns) is not None:
+	if root[i].find('ns:g',namespaces=ns) is not None:
 		print i,"hit"
+		for j,y in enumerate(root[i]):
+			print j,"hit"
 	else:
 		print i,"xx"
