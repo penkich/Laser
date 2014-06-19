@@ -10,3 +10,7 @@ for i,x in enumerate(root):
 			print j,"hit"
 	else:
 		print i,"xx"
+
+for x in root.iter('{http://www.w3.org/2000/svg}path'):
+	print x.get('d')
+
