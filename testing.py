@@ -19,4 +19,9 @@ for x in root.iter('{http://www.w3.org/2000/svg}path'):
 
 for x in root.iter('{http://www.w3.org/2000/svg}g'):
 	print "g-transform=", x.get('transform')
+	print "attrib=", x.attrib
+
+for x in root.findall('{http://www.w3.org/2000/svg}g'):
+        print x.attrib
+
 
