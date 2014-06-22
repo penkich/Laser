@@ -5,9 +5,11 @@
 # class 2014-05-10
 # flame 2014-06-13
 #################################################
-import libxml2,math,re
+import math,re
 import numpy as np
 import pickle
+#import libxml2
+import xml.etree.ElementTree as ET
 
 def getPointC(t,ar1,ar2,ar3,ar4):
         tp = 1.0 - t
@@ -143,28 +145,42 @@ def exec_translate(data,translate):
 class inksvg:
         def __init__(self,fname):
 		self.fname = fname
-        def getg(self):
-                tmp =[]
-                doc = libxml2.parseFile(self.fname)
-                for node in doc:
-                        if node.name == "g":
-                                tmp.append(str(node))
-                doc.freeDoc()
-                return tmp
-        def getPath(self):
-                tmp =[]
-                doc = libxml2.parseFile(self.fname)
-                for node in doc:
-                        if node.name == "path":
-                                tmp.append(str(node))
-                doc.freeDoc()
-                return tmp
-        def getd(self):
-                tmp =[]
-		for s in self.getPath():
-	       	        m = re.match('.*d\=\"([mMcClLaA].*?)\"',s)
-                        tmp.append(m.group(1))
-                return tmp
+		self.ns = '{http://www.w3.org/2000/svg}'
+#        def getg(self):
+#                tmp =[]
+#                doc = libxml2.parseFile(self.fname)
+#                for node in doc:
+#                        if node.name == "g":
+#                                tmp.append(str(node))
+#                doc.freeDoc()
+#                return tmp
+#        def getPath(self):
+#                tmp =[]
+#                doc = libxml2.parseFile(self.fname)
+#                for node in doc:
+#                        if node.name == "path":
+#                                tmp.append(str(node))
+#                doc.freeDoc()
+#                return tmp
+
+	def getroot(self):
+		a = ET.parse(self.fname)
+		root = a.getroot()
+		return root
+
+	def getd(self):
+		tmp =[]
+		root = self.getroot()
+		for x in root.iter(self.ns + 'path'):
+			tmp.append(x.get('d'))
+		return tmp
+
+#        def getd(self):
+#                tmp =[]
+#		for s in self.getPath():
+#	       	        m = re.match('.*d\=\"([mMcClLaA].*?)\"',s)
+#                        tmp.append(m.group(1))
+#                return tmp
         def getstructPath(self):
                 tmp2 =[]
 		for s in self.getd():
@@ -174,10 +190,14 @@ class inksvg:
 				m = re.match('([mMcClLaA]) ([\d\,\.\- e]*)',s)
 				if m:
                                         tmp.append(m.group(1))
+					#print m.group(1)
                                         if m.group(1) != 'a' and m.group(1) != 'A':
                                                 for x in m.group(2).split(' '):
+#							print "x",x
                                                         if x:
-                                                                tmp3.append([float(x.split(',')[0]),float(x.split(',')[1])])
+								if len(x.split(',')) ==1:
+									x+=',0.0'
+								tmp3.append([float(x.split(',')[0]),float(x.split(',')[1])])
                                                 tmp.append(tmp3)
                                                 s = s[m.end(2):]
                                         if m.group(1) == 'a' or m.group(1) == 'A':
@@ -195,52 +215,124 @@ class inksvg:
 					break
                         tmp2.append(tmp)
 		return tmp2
-        def gettrcxy(self):
-                tmp =[]
-		for s in self.getPath():
-        		mx = re.match('.*inkscape\:transform\-center\-x=\"([\-\.\d]*).*\"',s)
-        		my = re.match('.*inkscape\:transform\-center\-y=\"([\-\.\d]*).*\"',s)
-			if mx:
-				tmp.append([float(mx.group(1)),float(my.group(1))])
-                        else:
-                                tmp.append([0,0])
-                return tmp
-        def getmatrix(self):
-                tmp2 =[]
-		for s in self.getPath():
-                        tmp =[]
-        		m = re.match('.*transform\=\"matrix\(([\-\.\d\,]*)\).*\"',s)
-        		if m:
-        			for v in m.group(1).split(','):
-                			tmp.append(float(v))
-                                tmp2.append(tmp)
-			else:
-				tmp2.append("")
-		return tmp2
-        def getgmatrix(self):
-                tmp2 =[]
-		for s in self.getg():
-                        tmp =[]
-        		m = re.match('.*transform\=\"matrix\(([\-\.\d\,]*)\).*\"',s)
-        		if m:
-        			for v in m.group(1).split(','):
-                			tmp.append(float(v))
-                                tmp2.append(tmp)
-			else:
-				tmp2.append("")
-		return tmp2
-        def gettranslate(self):
+#        def gettrcxy(self):
+#                tmp =[]
+#		for s in self.getPath():
+#        		mx = re.match('.*inkscape\:transform\-center\-x=\"([\-\.\d]*).*\"',s)
+#        		my = re.match('.*inkscape\:transform\-center\-y=\"([\-\.\d]*).*\"',s)
+#			if mx:
+#				tmp.append([float(mx.group(1)),float(my.group(1))])
+#                        else:
+#                                tmp.append([0,0])
+#                return tmp
+
+#        def getmatrix(self):
+#                tmp2 =[]
+#		for s in self.getPath():
+#                        tmp =[]
+#        		m = re.match('.*transform\=\"matrix\(([\-\.\d\,]*)\).*\"',s)
+#        		if m:
+#        			for v in m.group(1).split(','):
+#                			tmp.append(float(v))
+#                                tmp2.append(tmp)
+#			else:
+#				tmp2.append("")
+#		return tmp2
+
+	def getmatrix(self):
+		root = self.getroot()
 		tmp2 =[]
-		for s in self.getPath():
-                        tmp =[]
-		        m = re.match('.*transform\=\"translate\(([\-\.\d\,]*)\).*\"',s)
-			if m:
-        			for v in m.group(1).split(','):
-                			tmp.append(float(v))
-                                tmp2.append(tmp)
+		for x in root.iter(self.ns + 'path'):
+			s = x.get('transform')
+			if s:
+				tmp =[]
+				m = re.match('matrix\(([\-\.\d\,]*)\)',s)
+				if m:
+					for v in m.group(1).split(','):
+						tmp.append(float(v))
+					tmp2.append(tmp)
+				else:
+					tmp2.append("")
 			else:
 				tmp2.append("")
 		return tmp2
+
+
+	def getgmatrix(self):
+		root = self.getroot()
+		tmp2 =[]
+		for x in root.iter(self.ns + 'g'):
+			s = x.get('transform')
+			if s:
+				tmp =[]
+				m = re.match('matrix\(([\-\.\d\,]*)\)',s)
+				if m:
+					for v in m.group(1).split(','):
+						tmp.append(float(v))
+					tmp2.append(tmp)
+				else:
+					tmp2.append("")
+			else:
+				tmp2.append("")
+		return tmp2
+
+	def getGTransform(self):
+		root = self.getroot()
+		tmp =[]
+		stack =[]
+		for i,x in enumerate(root.iter(self.ns + 'g')):
+			stack.append(x.get('transform',''))
+			if x.find('{http://www.w3.org/2000/svg}path') != None:
+				for m in range(len(stack)):
+					if tmp != []:
+						tmp = ([stack.pop(),tmp])
+					else:
+						tmp = [stack.pop()]
+		return tmp
+
+#        def getgmatrix(self):
+#                tmp2 =[]
+#		for s in self.getg():
+#                        tmp =[]
+#        		m = re.match('.*transform\=\"matrix\(([\-\.\d\,]*)\).*\"',s)
+#        		if m:
+#        			for v in m.group(1).split(','):
+#                			tmp.append(float(v))
+#                                tmp2.append(tmp)
+#			else:
+#				tmp2.append("")
+#		return tmp2
+
+#        def gettranslate(self):
+#		tmp2 =[]
+#		for s in self.getPath():
+#                        tmp =[]
+#		        m = re.match('.*transform\=\"translate\(([\-\.\d\,]*)\).*\"',s)
+#			if m:
+#        			for v in m.group(1).split(','):
+#                			tmp.append(float(v))
+#                                tmp2.append(tmp)
+#			else:
+#				tmp2.append("")
+#		return tmp2
+
+	def gettranslate(self):
+		root = self.getroot()
+		tmp2 =[]
+		for x in root.iter(self.ns + 'path'):
+			s = x.get('transform')
+			if s:
+				tmp =[]
+				m = re.match('translate\(([\-\.\d\,]*)\)',s)
+				if m:
+					for v in m.group(1).split(','):
+						tmp.append(float(v))
+					tmp2.append(tmp)
+				else:
+					tmp2.append("")
+			else:
+				tmp2.append("")
+		return tmp2			
 
 def getpoint(structPath,Matrix,Trcxy,Translate,t):
                ar =[]
