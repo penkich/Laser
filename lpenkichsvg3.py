@@ -385,6 +385,36 @@ def getpoint(structPath,Matrix,Trcxy,Translate,t):
                        ar.append(tmp)
                return ar
 
+def unifyd(d1):
+	# delete cmd redundancy (eg. [[M [12.34, 21.34], [M [1.2, 2.1]] -> [[M [12.34, 21.34], [1.2, 2.1]])
+	tmp = []
+	cmdstack =[]
+	cmdstack.append('')
+	datastack =[]
+	datastack.append('')
+	flag = 0
+	for x in d1:
+		if x =='M' or x =='C' or x =='L' or x =='z':
+			pop = cmdstack.pop()
+			cmdstack.append(pop)
+			if x != pop:
+				cmdstack.append(x)
+			else:
+				flag = 1
+		else:
+			if flag:
+				data = datastack.pop() + x
+				datastack.append(data)
+				flag =0
+			else:
+				datastack.append(x)
+	for i,x in enumerate(cmdstack):
+		tmp.append(x)
+		if x =='z':
+			break
+		tmp.append(datastack[i])
+	return tmp[2:]
+
 def touitu_d(x0,y0,d1):
         tmp =[]
         for i,x in enumerate(d1):
@@ -403,6 +433,11 @@ def touitu_d(x0,y0,d1):
                         tmp2 = rel2abs4c(x0,y0,d1[i+1])
                         tmp.append(tmp2)
                         x0,y0 = tmp2[-1]
+                if x == 'C':
+                        tmp.append('C')
+                        tmp2 = d1[i+1]
+                        tmp.append(tmp2)
+                        x0,y0 = tmp2[-1]
                 if x == 'M':
                         tmp.append('M')
                         tmp2 = d1[i+1]
@@ -416,7 +451,7 @@ def touitu_d(x0,y0,d1):
                 if x == 'z':
                         tmp.append(d1[i])
                         break
-        return tmp
+        return unifyd(tmp)
 
 
 def devided(d1,d2,n,matrix1,matrix2,translate1,translate2):
