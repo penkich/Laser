@@ -71,7 +71,7 @@ for i in range(argc-2):
 	n = 30 # n of flames
 	for i in range(n):
 		c= pensvg.devidestructPath(pensvg.touitustructPath(a_structPath),pensvg.touitustructPath(b_structPath),1.0/(n-1) * i,a_Matrix,b_Matrix,a_Translate,b_Translate)
-		d= pensvg.getpoint(c,a_Matrix,a_Trcxy,a_Translate,3)
+		d= pensvg.getpoint(c,a_Matrix,a_Trcxy,a_Translate,20)
 		tmp.append(d)
 	tmp2 += tmp
 #print tmp2
