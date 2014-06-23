@@ -43,6 +43,9 @@ for i in range(argc-2):
 		if b_gMatrix[1]:
 			for i in range(len(b_Matrix)):
 				b_Matrix[i] = b_gMatrix[1]
+	
+#	print pensvg.touitustructPath(a_structPath)
+
 #	print "a",a_gMatrix
 #	print "b",b_gMatrix
 #	print "a",a_Matrix
@@ -50,8 +53,6 @@ for i in range(argc-2):
 
 #	print "GTransform",a.getGTransform()
 #	exit()
-
-
 
 #	print "0",a.getg()[0]
 #	print "1",a.getg()[1]
@@ -70,8 +71,8 @@ for i in range(argc-2):
 	n = 30 # n of flames
 	for i in range(n):
 		c= pensvg.devidestructPath(pensvg.touitustructPath(a_structPath),pensvg.touitustructPath(b_structPath),1.0/(n-1) * i,a_Matrix,b_Matrix,a_Translate,b_Translate)
-		d= pensvg.getpoint(c,a_Matrix,a_Trcxy,a_Translate,20)
+		d= pensvg.getpoint(c,a_Matrix,a_Trcxy,a_Translate,3)
 		tmp.append(d)
 	tmp2 += tmp
-print tmp2
-#print pickle.dumps(tmp2)
+#print tmp2
+print pickle.dumps(tmp2)
