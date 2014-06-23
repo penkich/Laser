@@ -25,7 +25,7 @@ def hokan(ar1,ar2):
         d = math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))
         if (d==0):
                 return ar
-        n = 1+int(d/10)
+        n = 1+int(d/40)
         for i in range(n):
                 ar.append([x1,y1,HIGH]) # enphasize start point
         for i in range(n):
