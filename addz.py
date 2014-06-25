@@ -35,7 +35,7 @@ def hokan(ar1,ar2):
         for i in range(n):
                 ar.append([x2,y2,LOW])
         for i in range(n):
-                ar.append([x2,y2,HIGH]) # enphasize start point
+                ar.append([x2,y2,HIGH]) # enphasize end point
         return ar
 
 
