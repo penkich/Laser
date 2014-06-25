@@ -334,6 +334,21 @@ class inksvg:
 				tmp2.append("")
 		return tmp2			
 
+	def getstroke(self):
+		root = self.getroot()
+		tmp =[]
+		for x in root.iter(self.ns + 'path'):
+			s = x.get('style')
+			if s:
+				m = re.match('.*stroke\:\#([0-9A-Fa-f]*)',s)
+				if m:
+					tmp.append(m.group(1))
+				else:
+					tmp.append("")
+			else:
+				tmp.append("")
+		return tmp			
+
 def getpoint(structPath,Matrix,Trcxy,Translate,t):
                ar =[]
                m =[]
