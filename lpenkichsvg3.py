@@ -146,22 +146,6 @@ class inksvg:
         def __init__(self,fname):
 		self.fname = fname
 		self.ns = '{http://www.w3.org/2000/svg}'
-#        def getg(self):
-#                tmp =[]
-#                doc = libxml2.parseFile(self.fname)
-#                for node in doc:
-#                        if node.name == "g":
-#                                tmp.append(str(node))
-#                doc.freeDoc()
-#                return tmp
-#        def getPath(self):
-#                tmp =[]
-#                doc = libxml2.parseFile(self.fname)
-#                for node in doc:
-#                        if node.name == "path":
-#                                tmp.append(str(node))
-#                doc.freeDoc()
-#                return tmp
 
 	def getroot(self):
 		a = ET.parse(self.fname)
@@ -175,12 +159,6 @@ class inksvg:
 			tmp.append(x.get('d'))
 		return tmp
 
-#        def getd(self):
-#                tmp =[]
-#		for s in self.getPath():
-#	       	        m = re.match('.*d\=\"([mMcClLaA].*?)\"',s)
-#                        tmp.append(m.group(1))
-#                return tmp
         def getstructPath(self):
                 tmp2 =[]
 		for s in self.getd():
@@ -190,10 +168,8 @@ class inksvg:
 				m = re.match('([mMcClLaA]) ([\d\,\.\- e]*)',s)
 				if m:
                                         tmp.append(m.group(1))
-					#print m.group(1)
                                         if m.group(1) != 'a' and m.group(1) != 'A':
                                                 for x in m.group(2).split(' '):
-#							print "x",x
                                                         if x:
 								if len(x.split(',')) ==1:
 									x+=',0.0'
@@ -215,29 +191,6 @@ class inksvg:
 					break
                         tmp2.append(tmp)
 		return tmp2
-#        def gettrcxy(self):
-#                tmp =[]
-#		for s in self.getPath():
-#        		mx = re.match('.*inkscape\:transform\-center\-x=\"([\-\.\d]*).*\"',s)
-#        		my = re.match('.*inkscape\:transform\-center\-y=\"([\-\.\d]*).*\"',s)
-#			if mx:
-#				tmp.append([float(mx.group(1)),float(my.group(1))])
-#                        else:
-#                                tmp.append([0,0])
-#                return tmp
-
-#        def getmatrix(self):
-#                tmp2 =[]
-#		for s in self.getPath():
-#                        tmp =[]
-#        		m = re.match('.*transform\=\"matrix\(([\-\.\d\,]*)\).*\"',s)
-#        		if m:
-#        			for v in m.group(1).split(','):
-#                			tmp.append(float(v))
-#                                tmp2.append(tmp)
-#			else:
-#				tmp2.append("")
-#		return tmp2
 
 	def getmatrix(self):
 		root = self.getroot()
@@ -290,32 +243,6 @@ class inksvg:
 						tmp = [stack.pop()]
 		return tmp
 
-#        def getgmatrix(self):
-#                tmp2 =[]
-#		for s in self.getg():
-#                        tmp =[]
-#        		m = re.match('.*transform\=\"matrix\(([\-\.\d\,]*)\).*\"',s)
-#        		if m:
-#        			for v in m.group(1).split(','):
-#                			tmp.append(float(v))
-#                                tmp2.append(tmp)
-#			else:
-#				tmp2.append("")
-#		return tmp2
-
-#        def gettranslate(self):
-#		tmp2 =[]
-#		for s in self.getPath():
-#                        tmp =[]
-#		        m = re.match('.*transform\=\"translate\(([\-\.\d\,]*)\).*\"',s)
-#			if m:
-#        			for v in m.group(1).split(','):
-#                			tmp.append(float(v))
-#                                tmp2.append(tmp)
-#			else:
-#				tmp2.append("")
-#		return tmp2
-
 	def gettranslate(self):
 		root = self.getroot()
 		tmp2 =[]
@@ -334,28 +261,29 @@ class inksvg:
 				tmp2.append("")
 		return tmp2			
 
-	def getstroke(self):
+	def getcolor(self):
 		root = self.getroot()
-		tmp =[]
+		tmp2 =[]
 		for x in root.iter(self.ns + 'path'):
 			s = x.get('style')
 			if s:
 				m = re.match('.*stroke\:\#([0-9A-Fa-f]*)',s)
 				if m:
-					tmp.append(m.group(1))
+					tmp2.append(m.group(1))
 				else:
-					tmp.append("")
+					tmp2.append("")
 			else:
-				tmp.append("")
-		return tmp			
+				tmp2.append("")
+		return tmp2			
 
-def getpoint(structPath,Matrix,Trcxy,Translate,t):
+def getpoint(structPath,Matrix,Translate,Color,t):
                ar =[]
                m =[]
                j =0
                for path in structPath:
                        x0,y0 =0,0
                        tmp =[]
+		       tmp.append(Color[j])
                        for i,s3 in enumerate(path):
 			       if s3 == 'm':
                      		       m = m2point(t,x0,y0,path[i+1])
@@ -401,7 +329,8 @@ def getpoint(structPath,Matrix,Trcxy,Translate,t):
                return ar
 
 def unifyd(d1):
-	# delete cmd redundancy (eg. [[M [12.34, 21.34], [M [1.2, 2.1]] -> [[M [12.34, 21.34], [1.2, 2.1]])
+	# delete cmd redundancy
+        # (eg. [[M [12.34, 21.34], [M [1.2, 2.1]] -> [[M [12.34, 21.34], [1.2, 2.1]])
 	tmp = []
 	cmdstack =[]
 	cmdstack.append('')
