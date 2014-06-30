@@ -9,9 +9,20 @@ argvs = sys.argv
 argc = len(argvs)
 tmp2 =[]
 
-for i in range(argc-2):
-	a=pensvg.inksvg(argvs[i+1])
-	b=pensvg.inksvg(argvs[i+2])
+argvs = argvs[1:]
+argc = len(argvs)
+files = []
+i = 0
+while i < argc-1:
+	if argvs[i+1][-3:] != "svg":
+		i = i+1
+	else:
+		files.append([argvs[i],argvs[i+1]])
+	i = i+1
+
+for x in files:
+	a=pensvg.inksvg(x[0])
+	b=pensvg.inksvg(x[1])
 
 	a_structPath = a.getstructPath()
 
@@ -25,15 +36,15 @@ for i in range(argc-2):
 	b_Translate = b.gettranslate()
 
 
-	GTrans = a.getGTransform()[0]
-	if GTrans[0:9] == 'translate':
-		tmp = GTrans[10:-1]
-		print "translate",GTrans,tmp
-	if GTrans[0:6] == 'matrix':
-		print "matrix",GTrans
-	if GTrans[0:5] == 'scale':
-		tmp = GTrans[6:-1]
-		print "scale",GTrans,tmp
+#	GTrans = a.getGTransform()[0]
+#	if GTrans[0:9] == 'translate':
+#		tmp = GTrans[10:-1]
+#		print "translate",GTrans,tmp
+#	if GTrans[0:6] == 'matrix':
+#		print "matrix",GTrans
+#	if GTrans[0:5] == 'scale':
+#		tmp = GTrans[6:-1]
+#		print "scale",GTrans,tmp
 
 	a_color = a.getcolor()
 
@@ -46,30 +57,8 @@ for i in range(argc-2):
 			for i in range(len(b_Matrix)):
 				b_Matrix[i] = b_gMatrix[1]
 	
-#	print pensvg.touitustructPath(a_structPath)
-
-#	print "a",a_gMatrix
-#	print "b",b_gMatrix
-#	print "a",a_Matrix
-#	print "b",b_Matrix
-
-#	print "GTransform",a.getGTransform()
-#	exit()
-
-#	print "0",a.getg()[0]
-#	print "1",a.getg()[1]
-#	print a_structPath
-#	print argvs[i+1]
-#	print a_Matrix
-#	print a_Translate
-
-#	print argvs[i+2]
-#	print b_Matrix
-#	print b_Translate
-
-
 	tmp =[]
-	n = 30 # n of flames
+	n = 30 # n of frames
 	for i in range(n):
 		c= pensvg.devidestructPath(pensvg.touitustructPath(a_structPath),pensvg.touitustructPath(b_structPath),1.0/(n-1) * i,a_Matrix,b_Matrix,a_Translate,b_Translate)
 		d= pensvg.getpoint(c,a_Matrix,a_Translate,a_color,20)
