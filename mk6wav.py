@@ -72,7 +72,7 @@ for flame in flames:
 			for i in range(repeat):
 				fo.write(struct.pack("h",(x[0]-xsize/2.0)/xsize * 32000)) # ch1 (x)
 				fo.write(struct.pack("h",(x[1]-ysize/2.0)/ysize * 32000)) # ch2 (y)
-				fo.write(struct.pack("h",x[2])) # ch3 (z)
+				fo.write(struct.pack("h",x[2])) # ch3 (z ... on/off)
 				fo.write(struct.pack("h",0)) # ch4 not use
 				fo.write(struct.pack("h",0)) # ch5 not use
 				fo.write(struct.pack("h",0)) # ch6 not use
