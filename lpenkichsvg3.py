@@ -3,7 +3,7 @@
 # for fablab kitakagaya rev 2014-04-02
 # 2014-05-06
 # class 2014-05-10
-# flame 2014-06-13
+# frame 2014-06-13
 #################################################
 import math,re
 import numpy as np
