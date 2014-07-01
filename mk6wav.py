@@ -72,7 +72,7 @@ for flame in flames:
 			for i in range(repeat):
 				x1 = (x[0]-xsize/2.0)/xsize * 32000
 				y1 = (x[1]-ysize/2.0)/ysize * 32000
-				if x1 > 32000:
+				if x1 > 32000: # if it exceeds Max then z=off
 					x1 = 32000
 					x[2] = -32000
 				if y1 > 32000:
