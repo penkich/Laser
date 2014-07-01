@@ -70,9 +70,23 @@ for flame in flames:
         for path in flame:
 		for x in path:
 			for i in range(repeat):
-				fo.write(struct.pack("h",(x[0]-xsize/2.0)/xsize * 32000)) # ch1 (x)
-				fo.write(struct.pack("h",(x[1]-ysize/2.0)/ysize * 32000)) # ch2 (y)
-				fo.write(struct.pack("h",x[2])) # ch3 (z ... on/off)
+				x1 = (x[0]-xsize/2.0)/xsize * 32000
+				y1 = (x[1]-ysize/2.0)/ysize * 32000
+				if x1 > 32000:
+					x1 = 32000
+					x[2] = -32000
+				if y1 > 32000:
+					y1 = 32000
+					x[2] = -32000
+				if x1 < -32000:
+					x1 = -32000
+					x[2] = -32000
+				if y1 < -32000:
+					y1 = -32000
+					x[2] = -32000
+				fo.write(struct.pack("h",x1)) # ch1 (x)
+				fo.write(struct.pack("h",y1)) # ch2 (y)
+				fo.write(struct.pack("h",x[2])) # ch3 (z)
 				fo.write(struct.pack("h",0)) # ch4 not use
 				fo.write(struct.pack("h",0)) # ch5 not use
 				fo.write(struct.pack("h",0)) # ch6 not use
