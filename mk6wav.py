@@ -16,7 +16,7 @@ argvs = sys.argv
 argc = len(argvs)
 
 fi = sys.stdin
-flames = np.array(pickle.load(fi))
+frames = np.array(pickle.load(fi))
 
 #fi = open(argvs[1],"r") # input file of x,y
 fo = open(argvs[1],"wb") # output file of wav
@@ -25,7 +25,7 @@ repeat = int(argvs[2]) # redundancy
 #################################
 # to make wav header (Extensible Format)
 #################################
-dsize = 20000000 # data size (set enough size for easy)
+dsize = 90000000 # data size (set enough size for easy)
 fsize = dsize + 44 # wav file size
 cksize = 40 # Chunk size: 40=fix
 fbit = 16 # bits 
@@ -66,8 +66,8 @@ fo.write(struct.pack("i",dsize))
 xsize = 750.0
 ysize = 750.0
 
-for flame in flames:
-        for path in flame:
+for frame in frames:
+        for path in frame:
 		for x in path:
 			for i in range(repeat):
 				x1 = (x[0]-xsize/2.0)/xsize * 32000
