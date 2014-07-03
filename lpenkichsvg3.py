@@ -4,6 +4,7 @@
 # 2014-05-06
 # class 2014-05-10
 # frame 2014-06-13
+# This work is under a creative commons License (CC BY 3.0)
 #################################################
 import math,re
 import numpy as np
