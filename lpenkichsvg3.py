@@ -1,6 +1,6 @@
 ################################################
 # lpenkichsvg3.py
-# This program is under a creative commons License (CC BY 3.0)
+# This program is under a creative commons public license (CC BY 3.0)
 # By penkich, a member of fablab kitakagaya
 #################################################
 import math
