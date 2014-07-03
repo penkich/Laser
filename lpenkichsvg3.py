@@ -1,12 +1,10 @@
 ################################################
-# lpenkichsvg3.py by penkich
-# for fablab kitakagaya rev 2014-04-02
-# 2014-05-06
-# class 2014-05-10
-# frame 2014-06-13
-# This work is under a creative commons License (CC BY 3.0)
+# lpenkichsvg3.py
+# This program is under a creative commons License (CC BY 3.0)
+# By penkich, a member of fablab kitakagaya
 #################################################
-import math,re
+import math
+import re
 import numpy as np
 import pickle
 #import libxml2
