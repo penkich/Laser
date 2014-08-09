@@ -29,7 +29,7 @@ $ python mkframe.py fabnight.svg fabnight.svg fabnight.svg fabnight.svg| python 
 
 
 
-サンプル２(http://youtu.be/9l8JLKCcH1s)
+<h3>サンプル２(http://youtu.be/9l8JLKCcH1s)</h3>
   
 $ python mkflame.py F.svg F.svg A.svg A.svg B.svg B.svg N.svg N.svg I.svg I.svg G.svg G.svg H.svg H.svg T.svg T.svg F.svg A.svg B.svg N.svg I.svg G.svg H.svg T.svg 88.svg 88.svg| python addz.py | python mk6wav.py out.wav 5
 
@@ -37,7 +37,7 @@ $ python mkflame.py F.svg F.svg A.svg A.svg B.svg B.svg N.svg N.svg I.svg I.svg 
 　
 
 
-サンプル３(http://youtu.be/eNeM1d6433c)
+<h3>サンプル３(http://youtu.be/eNeM1d6433c)</h3>
 
 $ python mkframe.py 2-0.svg 2-2.svg / 20-1.svg 20-2.svg / 201-1.svg 201-2.svg / 2014-1.svg 2014-2.svg 2014-2.svg 2014-3.svg 2014-4.svg | python addz.py | python mk6wav.py z.wav 4
 
@@ -45,7 +45,7 @@ $ python mkframe.py 2-0.svg 2-2.svg / 20-1.svg 20-2.svg / 201-1.svg 201-2.svg / 
 
 
 
-サンプル４（http://youtu.be/lbtdb77kan0)
+<h3>サンプル４（http://youtu.be/lbtdb77kan0)</h3>
 
 $ python mkframe.py tanabata1.svg tanabata2.svg / tanabata3.svg tanabata4.svg tanabata4.svg tanabata5.svg tanabata5.svg / tanabata2.svg tanabata2.svg | python addz.py | python mk6wav.py zz.wav 3
 
