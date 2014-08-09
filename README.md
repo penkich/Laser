@@ -5,7 +5,7 @@ All data including python script of this repository is under a creative commons 
 By penkich, a member of fablab kitakagaya<br>
 
 １）Inkscapeで描画したいデータを作成(svg形式)<br>
-２）svgをxy座標データに変換(mkflame.py)<br>
+２）svgをxy座標データに変換(mkframe.py)<br>
 ３）on/offデータを追加(addz.py)<br>
 ４）wavファイルに変換(mk6wav.py)<br>
 ５）aplayコマンドなどでwavファイルを再生<br>
@@ -32,7 +32,7 @@ $ python mkframe.py fabnight.svg fabnight.svg fabnight.svg fabnight.svg| python 
 
 <h3>サンプル２(http://youtu.be/9l8JLKCcH1s)</h3>
   
-$ python mkflame.py F.svg F.svg A.svg A.svg B.svg B.svg N.svg N.svg I.svg I.svg G.svg G.svg H.svg H.svg T.svg T.svg F.svg A.svg B.svg N.svg I.svg G.svg H.svg T.svg 88.svg 88.svg| python addz.py | python mk6wav.py out.wav 5
+$ python mkframe.py F.svg F.svg A.svg A.svg B.svg B.svg N.svg N.svg I.svg I.svg G.svg G.svg H.svg H.svg T.svg T.svg F.svg A.svg B.svg N.svg I.svg G.svg H.svg T.svg 88.svg 88.svg| python addz.py | python mk6wav.py out.wav 5
 
 　指定したsvgファイルは、要素の並びと制御点数が同一。各ファイルのデータ間は補間されるので、モーフィングのような効果が得られている。
 　
