@@ -21,7 +21,7 @@ $ python mkframe.py svgファイル1 svgファイル2 ・・・ | python addz.py
 　パラメータは、３〜５くらいで調整する。
 
 
-サンプル１(http://youtu.be/myfJ6V5ekQA)
+<h3>サンプル１(http://youtu.be/myfJ6V5ekQA)</h3>
 
 $ python mkframe.py fabnight.svg fabnight.svg fabnight.svg fabnight.svg| python addz.py | python mk6wav.py out.wav 4
 
@@ -38,6 +38,7 @@ $ python mkflame.py F.svg F.svg A.svg A.svg B.svg B.svg N.svg N.svg I.svg I.svg 
 
 
 サンプル３(http://youtu.be/eNeM1d6433c)
+
 $ python mkframe.py 2-0.svg 2-2.svg / 20-1.svg 20-2.svg / 201-1.svg 201-2.svg / 2014-1.svg 2014-2.svg 2014-2.svg 2014-3.svg 2014-4.svg | python addz.py | python mk6wav.py z.wav 4
 
 　数字の移動（要素の並びと制御点数が変化しない）をいくつか組み合わせ、最後に拡大縮小（これも要素の並びと制御点数が変化しない）した例。
@@ -45,5 +46,6 @@ $ python mkframe.py 2-0.svg 2-2.svg / 20-1.svg 20-2.svg / 201-1.svg 201-2.svg / 
 
 
 サンプル４（http://youtu.be/lbtdb77kan0)
+
 $ python mkframe.py tanabata1.svg tanabata2.svg / tanabata3.svg tanabata4.svg tanabata4.svg tanabata5.svg tanabata5.svg / tanabata2.svg tanabata2.svg | python addz.py | python mk6wav.py zz.wav 3
 
