@@ -1,6 +1,8 @@
 Laser
 =====
 <h3>ガルバノミラーでレーザー描画するためのデータ作成プログラム。</h3>
+All data including python script of this repository is under a creative commons License (CC BY 3.0)<br>
+By penkich, a member of fablab kitakagaya<br>
 
 １）Inkscapeで描画したいデータを作成(svg形式)<br>
 ２）svgをxy座標データに変換(mkflame.py)<br>
