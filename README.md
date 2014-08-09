@@ -9,6 +9,7 @@ Laser
 ５）wavファイルを再生
 
 使用方法
+
 $ python mkframe.py svgファイル1 svgファイル2 ・・・ | python addz.py | python mk6wav.py 出力ＷＡＶファイル パラメータ
  
 　svgファイルは、多数指定することにより、ファイル間が補間され、なめらかなパラパラ動画なる。
