@@ -6,7 +6,7 @@ Laser
 ２）svgをxy座標データに変換(mkflame.py)<br>
 ３）on/offデータを追加(addz.py)<br>
 ４）wavファイルに変換(mk6wav.py)<br>
-５）wavファイルを再生<br>
+５）aplayコマンドなどでwavファイルを再生<br>
 
 <h3>使用方法</h3>
 
