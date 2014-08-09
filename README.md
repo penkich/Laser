@@ -46,7 +46,7 @@ $ python mkframe.py 2-0.svg 2-2.svg / 20-1.svg 20-2.svg / 201-1.svg 201-2.svg / 
 
 
 
-<h3>サンプル４（http://youtu.be/lbtdb77kan0)</h3>
+<h3>サンプル４（https://www.youtube.com/watch?v=lbtdb77kan0)</h3>
 
 $ python mkframe.py tanabata1.svg tanabata2.svg / tanabata3.svg tanabata4.svg tanabata4.svg tanabata5.svg tanabata5.svg / tanabata2.svg tanabata2.svg | python addz.py | python mk6wav.py out.wav 3
 
