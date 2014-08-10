@@ -1,7 +1,7 @@
 Laser
 =====
 <h3>Scripts to generate wav-data for laser projector controlled by galvano mirror.</h3>
-All data including python script of this repository is under a creative commons License (CC BY 3.0)<br>
+All data including python script in this repository is under a creative commons License (CC BY 3.0)<br>
 By penkich, a member of fablab kitakagaya<br>
 
 Basic procedure<br>
@@ -23,12 +23,13 @@ $ python mkframe.py fabnight.svg fabnight.svg fabnight.svg fabnight.svg| python 
 
  As all the same files, a static drawing of fabnight.svg can be appeared. 
 
+ All svg files exist in the svg directory.
 
 <h3>sample2(http://youtu.be/9l8JLKCcH1s)</h3>
   
 $ python mkframe.py F.svg F.svg A.svg A.svg B.svg B.svg N.svg N.svg I.svg I.svg G.svg G.svg H.svg H.svg T.svg T.svg F.svg A.svg B.svg N.svg I.svg G.svg H.svg T.svg 88.svg 88.svg| python addz.py | python mk6wav.py out.wav 5
 
- As all of the types and the number of elements of the files are same and differnece of these are calculated, morphic effect can be got.
+ As all of the types and the number of svg elements of files are the same, differnece of these are calculated, a movie data can be got.
 　
 <h3>sample3(http://youtu.be/eNeM1d6433c)</h3>
 
