@@ -14,7 +14,7 @@ Basic procedure
 
 $ python mkframe.py file1.svg file2.svg ... | python addz.py | python mk6wav.py out.wav parameter<br>
  Give 2 or more than 2 svg files to the command, then the difference of between svg paths can be calculated and x,y position datta 
-is generated as far as the type and the number of the svg elements are same. Otherwise, separate slashes(/) between files then the difference is not calculated.<br>　もし、制御点数が変わる場合は、ファイル間を/(スラッシュ)で区切ることができるが、ファイル間の補間はされない。<br>
+is generated as far as the type and the number of the svg elements are same. Otherwise, separate slashes(/) between files then the difference is not calculated.<br>
  If you change stroke of a path color to red, you can be able not to display it.<br> 
  You may adjust parameter value 3 to 5.<br>
 
