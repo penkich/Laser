@@ -21,7 +21,7 @@ $ python mkframe.py file1.svg file2.svg ... | python addz.py | python mk6wav.py 
 
 $ python mkframe.py fabnight.svg fabnight.svg fabnight.svg fabnight.svg| python addz.py | python mk6wav.py out.wav 4
 
- As the same files, a static drawing of fabnight.svg can be appeared. 
+ As all the same files, a static drawing of fabnight.svg can be appeared. 
 
 
 <h3>sample2(http://youtu.be/9l8JLKCcH1s)</h3>
