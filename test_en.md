@@ -34,6 +34,6 @@ $ python mkframe.py F.svg F.svg A.svg A.svg B.svg B.svg N.svg N.svg I.svg I.svg 
 
 $ python mkframe.py 2-0.svg 2-2.svg / 20-1.svg 20-2.svg / 201-1.svg 201-2.svg / 2014-1.svg 2014-2.svg 2014-2.svg 2014-3.svg 2014-4.svg | python addz.py | python mk6wav.py out.wav 4
 
- As the numeric characters written in the files inside the slashes are just change its location and size, the number of elements of the files are not changed.
+ As the numeric characters written in the files inside the slashes just change its location and size, the number of elements of the files are not changed.
 
 <h3>sample4(
