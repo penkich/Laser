@@ -28,7 +28,7 @@ $ python mkframe.py fabnight.svg fabnight.svg fabnight.svg fabnight.svg| python 
   
 $ python mkframe.py F.svg F.svg A.svg A.svg B.svg B.svg N.svg N.svg I.svg I.svg G.svg G.svg H.svg H.svg T.svg T.svg F.svg A.svg B.svg N.svg I.svg G.svg H.svg T.svg 88.svg 88.svg| python addz.py | python mk6wav.py out.wav 5
 
- As all of the types and the number of elements of the files are same, differnece of these are calculated, a morphic movie can be appeared.
+ As all of the types and the number of elements of the files are same and differnece of these are calculated, morphic effect can be got.
 　
 <h3>sample3(http://youtu.be/eNeM1d6433c)</h3>
 
