@@ -4,7 +4,7 @@ Laser
 All data including python script of this repository is under a creative commons License (CC BY 3.0)<br>
 By penkich, a member of fablab kitakagaya<br>
 
-Basic procedure
+Basic procedure<br>
 1) prepare svg files using Bézier tool of Inkscape.<br>
 2) convert svg data to x,y data by a script(mkframe.py)<br>
 3) add z(on/off) data by a script(addz.py)<br>
