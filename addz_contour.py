@@ -45,7 +45,7 @@ for paths in flames:
         for x in paths[i]:
             tmp.append([x[0],x[1],HIGH])
         for x in hokan(paths[i],paths[i+1]): # do hokan the last path to the next path
-                tmp.append([x[0],x[1],LOW])
+            tmp.append([x[0],x[1],LOW])
         tmp2.append(tmp)
     tmp =[]
     for x in (paths[-1]): # the last path
@@ -58,7 +58,7 @@ for paths in flames:
     out.append(tmp2)
 
 for x in out:
-	for xx in x:
-		for xxx in xx:
-			print xxx[0],",",xxx[1],",",xxx[2]
+    for xx in x:
+        for xxx in xx:
+            print xxx[0],",",xxx[1],",",xxx[2]
 #print pickle.dumps(out)
