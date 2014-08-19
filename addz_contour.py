@@ -2,7 +2,7 @@ import numpy as np
 import sys
 import math
 import re
-import pickle
+import cPickle
 
 fi = sys.stdin
 flames = pickle.load(fi)
