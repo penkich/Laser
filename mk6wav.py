@@ -10,7 +10,7 @@ import struct
 import string
 import math
 import numpy as np
-import pickle
+import cPickle
 
 argvs = sys.argv
 argc = len(argvs)

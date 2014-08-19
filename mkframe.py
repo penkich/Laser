@@ -1,5 +1,5 @@
 import numpy as np
-import pickle
+import cPickle
 import sys
 import re
 import math
