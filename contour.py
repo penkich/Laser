@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-import pickle
+import cPickle
  
 im = cv2.imread('4.jpg')
 imgray = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
