@@ -23,4 +23,4 @@ for i in range(start,n):
         tmp2.append([x[0][0],x[0][1]])
     tmp.append(tmp2)
 #print tmp
-print pickle.dumps([tmp])
+print cPickle.dumps([tmp])

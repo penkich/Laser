@@ -5,7 +5,7 @@ import re
 import cPickle
 
 fi = sys.stdin
-flames = pickle.load(fi)
+frames = cPickle.load(fi)
 
 global HIGH
 HIGH = 30000
@@ -37,7 +37,7 @@ def hokan(ar1,ar2):
 tmp = []
 tmp2 =[]
 out = []
-for paths in flames:
+for paths in frames:
     tmp2 =[]
     n = len(paths)
     for i in range(n-1):
@@ -61,4 +61,4 @@ for x in out:
     for xx in x:
         for xxx in xx:
             print xxx[0],",",xxx[1],",",xxx[2]
-#print pickle.dumps(out)
+#print cPickle.dumps(out)

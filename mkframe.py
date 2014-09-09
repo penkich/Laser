@@ -65,4 +65,4 @@ for x in files:
 		tmp.append(d)
 	tmp2 += tmp
 #print tmp2
-print pickle.dumps(tmp2)
+print cPickle.dumps(tmp2)

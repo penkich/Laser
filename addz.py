@@ -5,7 +5,7 @@ import re
 import cPickle
 
 fi = sys.stdin
-frames = pickle.load(fi)
+frames = cPickle.load(fi)
 
 global HIGH
 HIGH = 30000
@@ -71,4 +71,4 @@ for paths in frames:
 #	for xx in x:
 #		for xxx in xx:
 #			print xxx[0],",",xxx[1],",",xxx[2]
-print pickle.dumps(out)
+print cPickle.dumps(out)

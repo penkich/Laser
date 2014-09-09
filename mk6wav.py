@@ -16,7 +16,7 @@ argvs = sys.argv
 argc = len(argvs)
 
 fi = sys.stdin
-frames = np.array(pickle.load(fi))
+frames = np.array(cPickle.load(fi))
 
 #fi = open(argvs[1],"r") # input file of x,y
 fo = open(argvs[1],"wb") # output file of wav
