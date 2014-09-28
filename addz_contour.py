@@ -16,8 +16,8 @@ def hokan(ar1,ar2):
     ar = []
     x1 = int(ar1[-1][0]) # start point
     y1 = int(ar1[-1][1])
-    x2 = int(ar2[1][0]) # end point
-    y2 = int(ar2[1][1])
+    x2 = int(ar2[0][0]) # end point
+    y2 = int(ar2[0][1])
     d = math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))
     if (d==0):
         return ar
