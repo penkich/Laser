@@ -50,5 +50,5 @@ $ python mkframe.py 2-0.svg 2-2.svg / 20-1.svg 20-2.svg / 201-1.svg 201-2.svg / 
 
 $ python mkframe.py tanabata1.svg tanabata2.svg / tanabata3.svg tanabata4.svg tanabata4.svg tanabata5.svg tanabata5.svg / tanabata2.svg tanabata2.svg | python addz.py | python mk6wav.py out.wav 3
 
-<h3>サンプル5</h3>
+<h3>サンプル５（メーカーズバザール大阪2014）</h3>
 $ python mkframe.py M1.svg M2.svg M3.svg / a1.svg a2.svg a3.svg / k1.svg k2.svg k3.svg / e1.svg e2.svg / r1.svg r2.svg / s1.svg s2.svg / ba1.svg ba2.svg / za1.svg za2.svg / aa1.svg aa2.svg / ru1.svg ru2.svg / oo1.svg oo2.svg / saka1.svg saka2.svg| python addz.py | python mk6wav.py out.wav 3
